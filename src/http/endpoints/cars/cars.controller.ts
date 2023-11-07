@@ -15,6 +15,7 @@ import { UpdateCarDto } from './dto/update-car.dto';
 import { GetCarDto } from './dto/get-car.dto';
 import { throwHttpException } from 'src/utils/exception';
 import { I18nService } from 'nestjs-i18n';
+import { CarEntity } from './entities/car.entity';
 
 @Controller('cars')
 export class CarsController {
@@ -24,7 +25,9 @@ export class CarsController {
   ) {}
 
   @Post()
-  async create(@Body(new ValidationPipe()) createCarDto: CreateCarDto) {
+  async create(
+    @Body(new ValidationPipe()) createCarDto: CreateCarDto,
+  ): Promise<CarEntity> {
     try {
       return this.carsService.create(createCarDto);
     } catch (error: unknown) {
@@ -37,7 +40,7 @@ export class CarsController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(): Promise<CarEntity[]> {
     try {
       return this.carsService.findAll();
     } catch (error: unknown) {
@@ -50,7 +53,9 @@ export class CarsController {
   }
 
   @Get(':id')
-  async findOne(@Param(new ValidationPipe()) params: GetCarDto) {
+  async findOne(
+    @Param(new ValidationPipe()) params: GetCarDto,
+  ): Promise<CarEntity | undefined> {
     try {
       return this.carsService.findOne(params?.id ? +params?.id : 0);
     } catch (error: unknown) {
@@ -66,7 +71,7 @@ export class CarsController {
   async update(
     @Param(new ValidationPipe()) params: GetCarDto,
     @Body(new ValidationPipe()) updateCarDto: UpdateCarDto,
-  ) {
+  ): Promise<CarEntity> {
     try {
       return this.carsService.update(
         params?.id ? +params?.id : 0,
@@ -82,7 +87,9 @@ export class CarsController {
   }
 
   @Delete(':id')
-  async remove(@Param(new ValidationPipe()) params: GetCarDto) {
+  async remove(
+    @Param(new ValidationPipe()) params: GetCarDto,
+  ): Promise<CarEntity> {
     try {
       return this.carsService.remove(params?.id ? +params?.id : 0);
     } catch (error: unknown) {
