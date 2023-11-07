@@ -51,7 +51,17 @@ export class CarsService {
   }
 
   async findOne(id: number) {
-    return await this.carRepository.findOne(id);
+    const car = await this.carRepository.findOne(id);
+
+    if (!car) {
+      return throwHttpException(
+        HttpStatus.NOT_FOUND,
+        await this.i18n.translate('NOT_FOUND'),
+        { error: 'Not found' },
+      );
+    }
+
+    return car;
   }
 
   async update(id: number, updateCarDto: UpdateCarDto) {
