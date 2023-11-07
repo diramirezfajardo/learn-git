@@ -1,5 +1,6 @@
 {
   "ERROR_TRX": "Error al procesar la transacción",
   "ERROR": "Ha ocurrido un error",
-  "NOT_FOUND": "No encontrado"
+  "NOT_FOUND": "No encontrado",
+  "NOT_CAR": "Auto no encontrado"
 }

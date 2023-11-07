@@ -56,8 +56,8 @@ export class CarsService {
     if (!car) {
       return throwHttpException(
         HttpStatus.NOT_FOUND,
-        await this.i18n.translate('NOT_FOUND'),
-        { error: 'Not found' },
+        await this.i18n.translate('NOT_CAR'),
+        { error: 'Not found car' },
       );
     }
 
