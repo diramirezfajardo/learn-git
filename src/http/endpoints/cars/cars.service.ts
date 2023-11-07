@@ -17,7 +17,7 @@ export class CarsService {
     private readonly carRepository: Repository<CarEntity>,
   ) {}
 
-  async create(createCarDto: CreateCarDto) {
+  async create(createCarDto: CreateCarDto): Promise<CarEntity> {
     const { brand, model, logo, image, year } = createCarDto;
 
     const car = this.carRepository.create({
@@ -50,11 +50,11 @@ export class CarsService {
     return await this.carRepository.find({ order: { id: 'DESC' } });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<CarEntity | undefined> {
     return await this.carRepository.findOne(id);
   }
 
-  async update(id: number, updateCarDto: UpdateCarDto) {
+  async update(id: number, updateCarDto: UpdateCarDto): Promise<CarEntity> {
     const car: CarEntity | undefined = await this.carRepository.findOne(id);
 
     if (!car)
@@ -88,7 +88,7 @@ export class CarsService {
     return car;
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<CarEntity> {
     const car: CarEntity | undefined = await this.carRepository.findOne(id);
 
     if (!car)
