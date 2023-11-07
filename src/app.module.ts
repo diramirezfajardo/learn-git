@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nModule, I18nJsonParser } from 'nestjs-i18n';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CarsModule } from './http/endpoints/cars/cars.module';
 import baseConfig from './config/env/base-config';
@@ -29,10 +28,8 @@ import * as path from 'path';
       inject: [ConfigService],
     }),
     CarsModule,
-
-    // Http modules (endpoints)
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule {}
