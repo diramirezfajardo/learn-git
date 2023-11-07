@@ -8,6 +8,7 @@ import {
   Delete,
   ValidationPipe,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
@@ -15,6 +16,7 @@ import { UpdateCarDto } from './dto/update-car.dto';
 import { GetCarDto } from './dto/get-car.dto';
 import { throwHttpException } from 'src/utils/exception';
 import { I18nService } from 'nestjs-i18n';
+import { JwtGuard } from 'src/guards/jwt.guard';
 
 @Controller('cars')
 export class CarsController {
@@ -24,6 +26,7 @@ export class CarsController {
   ) {}
 
   @Post()
+  @UseGuards(JwtGuard)
   async create(@Body(new ValidationPipe()) createCarDto: CreateCarDto) {
     try {
       return this.carsService.create(createCarDto);

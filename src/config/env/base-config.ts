@@ -29,5 +29,8 @@ export default registerAs('baseConfig', () => {
       migrations_dir: process.env.TYPEORM_MIGRATIONS_DIR,
       logging: process.env.TYPEORM_LOGGING,
     },
+    endpoints: {
+      users: process.env.ENDPOINT_USERS,
+    },
   };
 });

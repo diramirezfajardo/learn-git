@@ -24,4 +24,5 @@ export default Joi.object({
   TYPEORM_MIGRATIONS: Joi.string(),
   TYPEORM_MIGRATIONS_DIR: Joi.string(),
   TYPEORM_LOGGING: Joi.boolean(),
+  ENDPOINT_USERS: Joi.string(),
 });
