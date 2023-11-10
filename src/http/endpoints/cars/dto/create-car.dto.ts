@@ -23,3 +23,13 @@ export class CreateCarDto {
   @IsNotEmpty()
   readonly year?: number;
 }
+
+export class CarUserDto {
+  @IsNumber()
+  @IsNotEmpty()
+  readonly carId?: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  readonly userId?: number;
+}

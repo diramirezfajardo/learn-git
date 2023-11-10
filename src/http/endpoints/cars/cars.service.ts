@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { CreateCarDto } from './dto/create-car.dto';
+import { CarUserDto, CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { CarEntity } from './entities/car.entity';
 import { Connection, EntityManager, Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { throwHttpException } from 'src/utils/exception';
 import { I18nService } from 'nestjs-i18n';
 import { randomUUID } from 'crypto';
+import { getUserService } from 'src/services/GetUser.service';
 
 @Injectable()
 export class CarsService {
@@ -42,6 +43,32 @@ export class CarsService {
         }
       },
     );
+
+    return car;
+  }
+
+  async carUser(carUserDto: CarUserDto) {
+    const { userId, carId } = carUserDto;
+
+    const car = this.carRepository.findOne({
+      id: carId,
+    });
+
+    const user = await getUserService(userId);
+
+    // await this.connection.transaction(
+    //   async (transactionalEntityManager: EntityManager): Promise<void> => {
+    //     try {
+    //       await transactionalEntityManager.save(car);
+    //     } catch (error: unknown) {
+    //       return throwHttpException(
+    //         HttpStatus.INTERNAL_SERVER_ERROR,
+    //         await this.i18n.translate('ERROR_TRX'),
+    //         { error },
+    //       );
+    //     }
+    //   },
+    // );
 
     return car;
   }

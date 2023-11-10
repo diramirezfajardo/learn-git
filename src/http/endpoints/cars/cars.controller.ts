@@ -9,9 +9,10 @@ import {
   ValidationPipe,
   HttpStatus,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
-import { CreateCarDto } from './dto/create-car.dto';
+import { CarUserDto, CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { GetCarDto } from './dto/get-car.dto';
 import { throwHttpException } from 'src/utils/exception';
@@ -30,6 +31,20 @@ export class CarsController {
   async create(@Body(new ValidationPipe()) createCarDto: CreateCarDto) {
     try {
       return this.carsService.create(createCarDto);
+    } catch (error: unknown) {
+      return throwHttpException(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        await this.i18n.translate('ERROR'),
+        { error },
+      );
+    }
+  }
+
+  @Put('user')
+  // @UseGuards(JwtGuard)
+  async saveCarUser(@Body(new ValidationPipe()) carUserDto: CarUserDto) {
+    try {
+      return this.carsService.carUser(carUserDto);
     } catch (error: unknown) {
       return throwHttpException(
         HttpStatus.INTERNAL_SERVER_ERROR,

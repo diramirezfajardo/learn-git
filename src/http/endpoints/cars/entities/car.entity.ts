@@ -39,6 +39,10 @@ export class CarEntity {
   @Column({ name: 'year' })
   year?: number;
 
+  @IsNumber()
+  @Column({ name: 'user_id' })
+  userId?: number;
+
   @IsDate()
   @Column({ name: 'created_at', type: 'timestamp' })
   createdAt?: DateTime | Date;

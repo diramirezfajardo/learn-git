@@ -59,6 +59,12 @@ export class addCarsTableAndCars1681167938954 implements MigrationInterface {
             isUnique: false,
           },
           {
+            name: 'user_id',
+            type: 'bigint',
+            isNullable: true,
+            isUnique: false,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             isNullable: false,
