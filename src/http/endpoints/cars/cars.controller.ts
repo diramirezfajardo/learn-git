@@ -16,7 +16,7 @@ import { GetCarDto } from './dto/get-car.dto';
 import { throwHttpException } from 'src/utils/exception';
 import { I18nService } from 'nestjs-i18n';
 
-@Controller('cars')
+@Controller('carss')
 export class CarsController {
   constructor(
     private readonly carsService: CarsService,
